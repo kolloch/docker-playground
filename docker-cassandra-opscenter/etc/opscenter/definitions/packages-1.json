@@ -1,0 +1,51 @@
+[
+    {
+        "package": "dse",
+        "name": "DataStax Enterprise",
+        "versions": [
+            {"version": "2.0", "cass_version": "1.0.8", "new_cluster": false},
+            {"version": "2.1", "cass_version": "1.0.10"},
+            {"version": "2.1.1", "cass_version": "1.0.10"},
+            {"version": "2.2", "cass_version": "1.1.5"},
+            {"version": "2.2.1", "cass_version": "1.1.6"},
+            {"version": "2.2.2", "cass_version": "1.1.9"},
+            {"version": "2.2.3", "cass_version": "1.1.9"},
+            {"version": "3.0", "cass_version": "1.1.9.1"},
+            {"version": "3.0.1", "cass_version": "1.1.9.3"},
+            {"version": "3.0.2", "cass_version": "1.1.9.7"},
+            {"version": "3.0.3", "cass_version": "1.1.9.8"},
+            {"version": "3.0.4", "cass_version": "1.1.9.8"},
+            {"version": "3.0.5", "cass_version": "1.1.9.8"},
+            {"version": "3.0.6", "cass_version": "1.1.9.9"},
+            {"version": "3.1.0", "cass_version": "1.2.6"},
+            {"version": "3.1.1", "cass_version": "1.2.6.1"},
+            {"version": "3.1.2", "cass_version": "1.2.6.4"}
+        ],
+        "repo_auth": true,
+        "is_dse": true
+    },
+    {
+        "package": "dsc",
+        "name": "DataStax Community",
+        "versions": [
+            {"version": "1.0.10", "cass_version": "1.0.10"},
+            {"version": "1.0.11", "cass_version": "1.0.11"},
+            {"version": "1.1.1", "cass_version": "1.1.1"},
+            {"version": "1.1.2", "cass_version": "1.1.2"},
+            {"version": "1.1.4", "cass_version": "1.1.4"},
+            {"version": "1.1.5", "cass_version": "1.1.5"},
+            {"version": "1.1.6", "cass_version": "1.1.6"},
+            {"version": "1.1.7", "cass_version": "1.1.7"},
+            {"version": "1.1.9", "cass_version": "1.1.9"},
+            {"version": "1.2.0", "cass_version": "1.2.0"},
+            {"version": "1.2.1", "cass_version": "1.2.1"},
+            {"version": "1.2.2", "cass_version": "1.2.2"},
+            {"version": "1.2.3", "cass_version": "1.2.3"},
+            {"version": "1.2.4", "cass_version": "1.2.4"},
+            {"version": "1.2.5", "cass_version": "1.2.5"},
+            {"version": "1.2.6", "cass_version": "1.2.6"}
+        ],
+        "repo_auth": false,
+        "is_dse": false
+    }
+]

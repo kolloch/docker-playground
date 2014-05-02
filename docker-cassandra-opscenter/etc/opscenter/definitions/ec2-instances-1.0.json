@@ -1,0 +1,51 @@
+{
+    "US East (Northern Virginia)": {
+        "ami-814ec2e8": {
+            "os": "Ubuntu 12.04",
+            "username": "ubuntu",
+            "userdata": "--raidonly"
+        }
+    },
+    "US West (Northern California)": {
+        "ami-544e6e11": {
+            "os": "Ubuntu 12.04",
+            "username": "ubuntu",
+            "userdata": "--raidonly"
+        }
+    },
+    "US West (Oregon)": {
+        "ami-4c32ba7c": {
+            "os": "Ubuntu 12.04",
+            "username": "ubuntu",
+            "userdata": "--raidonly"
+        }
+    },
+    "EU (Ireland)": {
+        "ami-b2212dc6": {
+            "os": "Ubuntu 12.04",
+            "username": "ubuntu",
+            "userdata": "--raidonly"
+        }
+    },
+    "Asia Pacific (Tokyo)": {
+        "ami-5a863d5b": {
+            "os": "Ubuntu 12.04",
+            "username": "ubuntu",
+            "userdata": "--raidonly"
+        }
+    },
+    "Asia Pacific (Singapore)": {
+        "ami-3b2c6e69": {
+            "os": "Ubuntu 12.04",
+            "username": "ubuntu",
+            "userdata": "--raidonly"
+        }
+    },
+    "South America (Sao Paulo)": {
+        "ami-1ce43c01": {
+            "os": "Ubuntu 12.04",
+            "username": "ubuntu",
+            "userdata": "--raidonly"
+        }
+    }
+}

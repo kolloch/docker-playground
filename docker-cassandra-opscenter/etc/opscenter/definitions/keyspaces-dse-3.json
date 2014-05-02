@@ -1,0 +1,5 @@
+{
+    "cassandra": ["dse_auth"],
+    "solr": ["dse_auth"],
+    "hadoop": ["dse_auth", "dse_security", "dse_system", "cfs", "cfs_archive", "HiveMetaStore"]
+}

@@ -1,0 +1,38 @@
+{
+    "apt": {
+        "match": [
+            "dse",
+            "dse-full",
+            "dse-hive",
+            "dse-pig",
+            "dse-demos",
+            "dse-libsolr",
+            "dse-libtomcat",
+            "dse-libsqoop",
+            "dse-liblog4j",
+            "dse-libmahout",
+            "dse-libcassandra",
+            "dse-libhadoop",
+            "dse-libhive",
+            "dse-libpig",
+            "dse-libhadoop-native"
+        ],
+        "latest": ["python-cql"]
+    },
+    "yum": {
+        "match": [
+            "dse-full",
+            "dse-hive",
+            "dse-pig",
+            "dse-demos",
+            "dse-libsolr",
+            "dse-libtomcat",
+            "dse-libsqoop",
+            "dse-liblog4j",
+            "dse-libmahout",
+            "dse-libcassandra"
+        ],
+        "latest": ["python26-cql"]
+    }
+}
+

@@ -1,0 +1,4 @@
+{
+    "apt": {"match": ["cassandra"]},
+    "yum": {"match": ["apache-cassandra1"]}
+}

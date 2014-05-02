@@ -3,38 +3,29 @@
 ##
 ##
 
-FROM ubuntu
+FROM ubuntu_java
 
-# This image was basically build by:
-#
-# MAINTAINER Zachary Marcantel, zach@zed.io, zmarcantel@utexas.edu
-#
-# I just do not want to blame him for all my errors ;)
-
-# Add PPA for the necessary JDK
-
-RUN echo "deb http://ppa.launchpad.net/webupd8team/java/ubuntu precise main" | tee /etc/apt/sources.list.d/webupd8team-java.list
-RUN echo "deb-src http://ppa.launchpad.net/webupd8team/java/ubuntu precise main" | tee -a /etc/apt/sources.list.d/webupd8team-java.list
-RUN apt-key adv --keyserver keyserver.ubuntu.com --recv-keys EEA14886
-RUN apt-get update
-
-# Install other packages
-RUN apt-get install -y curl
-
-# Preemptively accept the Oracle License
-RUN echo "oracle-java7-installer	shared/accepted-oracle-license-v1-1	boolean	true" > /tmp/oracle-license-debconf
-RUN /usr/bin/debconf-set-selections /tmp/oracle-license-debconf
-RUN rm /tmp/oracle-license-debconf
-
-# Install the JDK
-RUN apt-get install -y oracle-java7-installer oracle-java7-set-default
-RUN apt-get update
-
-# Install Cassandra
+# Install Cassandra, and SSH (and other dependencies of opscenter)
 RUN echo "deb http://debian.datastax.com/community stable main" | sudo tee -a /etc/apt/sources.list.d/datastax.sources.list
 RUN curl -L http://debian.datastax.com/debian/repo_key | sudo apt-key add -
 RUN apt-get update
-RUN apt-get install -y dsc20
+RUN apt-get install -y dsc20 openssh-server openssh-client supervisor sysstat psmisc
+
+# Configure SSH
+RUN mkdir -p /var/run/sshd && chmod -rx /var/run/sshd
+RUN sed -ri 's/#PermitRootLogin yes/PermitRootLogin yes/g' /etc/ssh/sshd_config
+RUN sed -ri 's/UsePAM yes/#UsePAM yes/g' /etc/ssh/sshd_config
+RUN sed -ri 's/#UsePAM no/UsePAM no/g' /etc/ssh/sshd_config
+RUN mkdir -p /root/.ssh/
+ADD ssh_key.pub /root/.ssh/authorized_keys
+ADD ssh_key.pub /root/.ssh/id_rsa.pub
+ADD ssh_key /root/.ssh/id_rsa
+RUN chown root:root /root/.ssh/authorized_keys
+RUN chmod 0700 /root/.ssh /root/.ssh/*
+
+# Configure Supervisord to startup cassandra and ssh
+ADD etc/supervisord.conf /etc/supervisor/conf.d/supervisord.conf
+RUN mkdir -p /var/log/supervisor
 
 # Deploy startup script
 ADD config.sh /usr/local/bin/config.sh
@@ -49,6 +40,7 @@ ADD etc/cassandra /etc/cassandra
 # needed for adjusting configuration on startup
 RUN chown -R cassandra:cassandra /etc/cassandra
 
-EXPOSE 7199 7000 7001 9160 9042
-USER cassandra
+EXPOSE 7199 7000 7001 9160 9042 
+EXPOSE 8012 61620 61621
+EXPOSE 22
 CMD init.sh 

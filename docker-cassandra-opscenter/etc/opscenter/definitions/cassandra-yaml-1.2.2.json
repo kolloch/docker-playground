@@ -1,0 +1,873 @@
+{
+    "properties": {
+        "cluster_name": {
+            "type": "string",
+            "required": true,
+            "default_value": "Test Cluster",
+            "editable": false
+        },
+        "num_tokens": {
+            "type": "int",
+            "required": false
+        },
+        "hinted_handoff_enabled": {
+            "type": "boolean",
+            "required": true,
+            "default_value": true
+        },
+        "max_hint_window_in_ms": {
+            "type": "int",
+            "required": true,
+            "default_value": 10800000,
+            "unit": "ms"
+        },
+        "hinted_handoff_throttle_in_kb": {
+            "type": "int",
+            "required": true,
+            "default_value": 1024,
+            "unit": "KB"
+        },
+        "max_hints_delivery_threads": {
+            "type": "int",
+            "required": true,
+            "default_value": 2
+        },
+        "populate_io_cache_on_flush": {
+            "type": "boolean",
+            "required": false,
+            "default_value": false
+        },
+
+        "authenticator": {
+            "type": "string",
+            "required": true,
+            "default_value": "org.apache.cassandra.auth.AllowAllAuthenticator"
+        },
+        "authorizer": {
+            "type": "string",
+            "required": true,
+            "default_value": "org.apache.cassandra.auth.AllowAllAuthorizer"
+        },
+        "permissions_validity_in_ms": {
+            "type": "int",
+            "required": true,
+            "default_value": 2000
+        },
+
+        "partitioner": {
+            "type": "string",
+            "required": true,
+            "editable": false,
+            "options": [
+                {"label": "Murmur3Partitioner", "value": "org.apache.cassandra.dht.Murmur3Partitioner"},
+                {"label": "RandomPartitioner", "value": "org.apache.cassandra.dht.RandomPartitioner"},
+                {"label": "ByteOrderedPartitioner", "value": "org.apache.cassandra.dht.ByteOrderedPartitioner"}
+            ],
+            "default_value": "org.apache.cassandra.dht.Murmur3Partitioner"
+        },
+
+        "data_file_directories": {
+            "type": "list",
+            "required": true,
+            "default_value": ["/var/lib/cassandra/data"],
+            "validation": "string"
+        },
+        "commitlog_directory": {
+            "type": "string",
+            "required": true,
+            "default_value": "/var/lib/cassandra/commitlog"
+        },
+        "saved_caches_directory": {
+            "type": "string",
+            "required": true,
+            "default_value": "/var/lib/cassandra/saved_caches"
+        },
+
+        "disk_failure_policy": {
+            "type": "string",
+            "required": true,
+            "options": [
+                {"label": "stop", "value": "stop"},
+                {"label": "best effort", "value": "best_effort"},
+                {"label": "ignore", "value": "ignore"}
+            ],
+            "default_value": "stop"
+        },
+
+        "key_cache_size_in_mb": {
+            "type": "int",
+            "required": false,
+            "unit": "MB"
+        },
+        "key_cache_save_period": {
+            "type": "int",
+            "required": true,
+            "default_value": 14400,
+            "unit": "seconds"
+        },
+        "key_cache_keys_to_save": {
+            "type": "int",
+            "required": false,
+            "unit": "keys"
+        },
+
+        "row_cache_size_in_mb": {
+            "type": "int",
+            "required": true,
+            "default_value": 0,
+            "unit": "MB"
+        },
+        "row_cache_save_period": {
+            "type": "int",
+            "required": true,
+            "default_value": 0,
+            "unit": "seconds"
+        },
+        "row_cache_keys_to_save": {
+            "type": "int",
+            "required": false,
+            "unit": "rows"
+        },
+
+        "row_cache_provider": {
+            "type": "string",
+            "required": true,
+            "options": [
+                {"label": "SerializingCacheProvider", "value": "SerializingCacheProvider"},
+                {"label": "ConcurrentLinkedHashCacheProvider", "value": "ConcurrentLinkedHashCacheProvider"}
+            ],
+            "default_value": "SerializingCacheProvider"
+        },
+
+        "commitlog_sync": {
+            "type": "string",
+            "required": true,
+            "options": [
+                {"label": "periodic", "value": "periodic"},
+                {"label": "batch", "value": "batch"}
+            ],
+            "default_value": "periodic"
+        },
+        "commitlog_sync_period_in_ms": {
+            "conditional": {
+                "commitlog_sync": "periodic"
+            },
+            "type": "int",
+            "default_value": 10000
+        },
+        "commitlog_sync_batch_window_in_ms": {
+            "conditional": {
+                "commitlog_sync": "batch"
+            },
+            "type": "int",
+            "default_value": 50
+        },
+
+        "commitlog_segment_size_in_mb": {
+            "type": "int",
+            "required": true,
+            "default_value": 32,
+            "unit": "MB"
+        },
+
+        "seeds": {
+            "type": "delimited-list",
+            "required": true
+        },
+        "flush_largest_memtables_at": {
+            "type": "float",
+            "required": true,
+            "default_value": 0.75
+        },
+        "reduce_cache_sizes_at": {
+            "type": "float",
+            "required": true,
+            "default_value": 0.85
+        },
+        "reduce_cache_capacity_to": {
+            "type": "float",
+            "required": true,
+            "default_value": 0.6
+        },
+
+        "concurrent_reads": {
+            "type": "int",
+            "required": true,
+            "default_value": 32
+        },
+        "concurrent_writes": {
+            "type": "int",
+            "required": true,
+            "default_value": 32
+        },
+
+        "memtable_total_space_in_mb": {
+            "type": "int",
+            "required": false,
+            "unit": "MB"
+        },
+        "commitlog_total_space_in_mb": {
+            "type": "int",
+            "required": false,
+            "unit": "MB"
+        },
+        "memtable_flush_writers": {
+            "type": "int",
+            "required": false
+        },
+        "memtable_flush_queue_size": {
+            "type": "int",
+            "required": true,
+            "default_value": 4
+        },
+
+        "trickle_fsync": {
+            "type": "boolean",
+            "required": true,
+            "default_value": false
+        },
+        "trickle_fsync_interval_in_kb": {
+            "type": "int",
+            "required": true,
+            "default_value": 10240,
+            "unit": "KB"
+        },
+
+        "storage_port": {
+            "type": "int",
+            "required": true,
+            "default_value": 7000,
+            "format": false
+        },
+        "ssl_storage_port": {
+            "type": "int",
+            "required": true,
+            "default_value": 7001,
+            "format": false
+        },
+
+        "start_rpc": {
+            "type": "boolean",
+            "required": true,
+            "default_value": true
+        },
+        "rpc_port": {
+            "type": "int",
+            "required": true,
+            "default_value": 9160,
+            "format": false
+        },
+        "rpc_keepalive": {
+            "type": "boolean",
+            "required": true,
+            "default_value": true
+        },
+        "rpc_server_type": {
+            "type": "string",
+            "required": true,
+            "options": [
+                {"label": "sync", "value": "sync"},
+                {"label": "half sync, half async", "value": "hsha"}
+            ],
+            "default_value": "sync"
+        },
+        "rpc_min_threads": {
+            "type": "int",
+            "required": false,
+            "unit": "threads"
+        },
+        "rpc_max_threads": {
+            "type": "int",
+            "required": false,
+            "unit": "threads"
+        },
+        "rpc_send_buff_size_in_bytes": {
+            "type": "int",
+            "required": false,
+            "unit": "bytes"
+        },
+        "rpc_recv_buff_size_in_bytes": {
+            "type": "int",
+            "required": false,
+            "unit": "bytes"
+        },
+
+        "thrift_framed_transport_size_in_mb": {
+            "type": "int",
+            "required": true,
+            "default_value": 15,
+            "unit": "MB"
+        },
+        "thrift_max_message_length_in_mb": {
+            "type": "int",
+            "required": true,
+            "default_value": 16,
+            "unit": "MB"
+        },
+
+        "incremental_backups": {
+            "type": "boolean",
+            "required": true,
+            "default_value": false
+        },
+        "snapshot_before_compaction": {
+            "type": "boolean",
+            "required": true,
+            "default_value": false
+        },
+        "auto_snapshot": {
+            "type": "boolean",
+            "required": true,
+            "default_value": true
+        },
+
+        "column_index_size_in_kb": {
+            "type": "int",
+            "required": true,
+            "default_value": 64,
+            "unit": "KB"
+        },
+
+        "in_memory_compaction_limit_in_mb": {
+            "type": "int",
+            "required": true,
+            "default_value": 64,
+            "unit": "MB"
+        },
+        "concurrent_compactors": {
+            "type": "int",
+            "required": false
+        },
+        "multithreaded_compaction": {
+            "type": "boolean",
+            "required": true,
+            "default_value": false
+        },
+        "compaction_throughput_mb_per_sec": {
+            "type": "int",
+            "required": true,
+            "default_value": 16,
+            "unit": "MB/sec"
+        },
+        "compaction_preheat_key_cache": {
+            "type": "boolean",
+            "required": true,
+            "default_value": true
+        },
+
+        "read_request_timeout_in_ms": {
+            "type": "int",
+            "required": true,
+            "default_value": 10000,
+            "unit": "ms"
+        },
+        "range_request_timeout_in_ms": {
+            "type": "int",
+            "required": true,
+            "default_value": 10000,
+            "unit": "ms"
+        },
+        "write_request_timeout_in_ms": {
+            "type": "int",
+            "required": true,
+            "default_value": 10000,
+            "unit": "ms"
+        },
+        "truncate_request_timeout_in_ms": {
+            "type": "int",
+            "required": true,
+            "default_value": 60000,
+            "unit": "ms"
+        },
+        "request_timeout_in_ms": {
+            "type": "int",
+            "required": true,
+            "default_value": 10000,
+            "unit": "ms"
+        },
+
+        "stream_throughput_outbound_megabits_per_sec": {
+            "type": "int",
+            "required": false,
+            "unit": "mbps"
+        },
+
+        "streaming_socket_timeout_in_ms": {
+            "type": "int",
+            "required": false,
+            "unit": "ms"
+        },
+
+        "cross_node_timeout": {
+            "type": "boolean",
+            "required": true,
+            "default_value": false
+        },
+
+        "inter_dc_tcp_nodelay": {
+            "type": "boolean",
+            "required": true,
+            "default_value": true
+        },
+
+        "phi_convict_threshold": {
+            "type": "int",
+            "required": false
+        },
+
+        "endpoint_snitch": {
+            "type": "string",
+            "required": true,
+            "options": [
+                {"label": "SimpleSnitch",
+                    "value": "org.apache.cassandra.locator.SimpleSnitch",
+                    "auto_topology": true},
+                {"label": "PropertyFileSnitch", "value": "org.apache.cassandra.locator.PropertyFileSnitch"},
+                {"label": "GossipingPropertyFileSnitch", "value": "org.apache.cassandra.locator.GossipingPropertyFileSnitch"},
+                {"label": "RackInferringSnitch",
+                    "value": "org.apache.cassandra.locator.RackInferringSnitch",
+                    "auto_topology": true},
+                {"label": "Ec2Snitch",
+                    "value": "org.apache.cassandra.locator.Ec2Snitch",
+                    "auto_topology": false},
+                {"label": "Ec2MultiRegionSnitch",
+                    "value": "org.apache.cassandra.locator.Ec2MultiRegionSnitch",
+                    "auto_topology": false},
+                {"label": "DseSimpleSnitch",
+                    "value": "com.datastax.bdp.snitch.DseSimpleSnitch",
+                    "auto_topology": true},
+                {"label": "DseDelegateSnitch",
+                    "value": "com.datastax.bdp.snitch.DseDelegateSnitch",
+                    "auto_topology": true}
+            ],
+            "default_value": "SimpleSnitch"
+        },
+
+        "dynamic_snitch_update_interval_in_ms": {
+            "type": "int",
+            "required": true,
+            "default_value": 100,
+            "unit": "ms"
+        },
+        "dynamic_snitch_reset_interval_in_ms": {
+            "type": "int",
+            "required": true,
+            "default_value": 600000,
+            "unit": "ms"
+        },
+        "dynamic_snitch_badness_threshold": {
+            "type": "float",
+            "required": true,
+            "default_value": 0.1
+        },
+
+        "request_scheduler": {
+            "type": "string",
+            "required": true,
+            "options": [
+                {"label": "NoScheduler", "value": "org.apache.cassandra.scheduler.NoScheduler"},
+                {"label": "RoundRobinScheduler", "value": "org.apache.cassandra.scheduler.RoundRobinScheduler"}
+            ],
+            "default_value": "org.apache.cassandra.scheduler.NoScheduler"
+        },
+
+        "request_scheduler_options": {
+            "type": "dict",
+            "required": false,
+            "parent": "request_scheduler",
+            "parent_options": {
+                "org.apache.cassandra.scheduler.RoundRobinScheduler": {
+                    "throttle_limit": {
+                        "type": "int",
+                        "required": true,
+                        "default_value": 80,
+                        "unit": "requests"
+                    },
+                    "default_weight": {
+                        "type": "int",
+                        "required": true,
+                        "default_value": 5
+                    },
+                    "weights": {
+                        "type": "dict",
+                        "required": false,
+                        "validation": "int"
+                    }
+                }
+            }
+        },
+        "request_scheduler_id": {
+            "conditional": {
+                "request_scheduler": "org.apache.cassandra.scheduler.RoundRobinScheduler"
+            },
+            "type": "string",
+            "required": false,
+            "options": [
+                {"label": "keyspace", "value": "keyspace"}
+            ],
+            "default_value": "keyspace"
+        },
+
+        "index_interval": {
+            "type": "int",
+            "required": true,
+            "default_value": 128
+        },
+
+        "server_encryption_options": {
+            "type": "dict",
+            "fields": {
+                "internode_encryption": {
+                    "type": "string",
+                    "options": [
+                        {"label": "none", "value": "none"},
+                        {"label": "all", "value": "all"},
+                        {"label": "dc", "value": "dc"},
+                        {"label": "rack", "value": "rack"}
+                    ],
+                    "default_value": "none"
+                },
+                "keystore": {
+                    "type": "string",
+                    "default_value": "conf/.keystore"
+                },
+                "keystore_password": {
+                    "type": "string",
+                    "default_value": "cassandra"
+                },
+                "truststore": {
+                    "type": "string",
+                    "default_value": "conf/.truststore"
+                },
+                "truststore_password": {
+                    "type": "string",
+                    "default_value": "cassandra"
+                },
+                "protocol": {
+                    "type": "string",
+                    "required": false,
+                    "default_value": "TLS"
+                },
+                "algorithm": {
+                    "type": "string",
+                    "required": false,
+                    "default_value": "SunX509"
+                },
+                "store_type": {
+                    "type": "string",
+                    "required": false,
+                    "default_value": "JKS"
+                },
+                "cipher_suites": {
+                    "type": "list",
+                    "required": false,
+                    "default_value": ["TLS_RSA_WITH_AES_128_CBC_SHA", "TLS_RSA_WITH_AES_256_CBC_SHA"]
+                },
+                "require_client_auth": {
+                    "type": "boolean",
+                    "required": false,
+                    "default_value": false
+                }
+            },
+            "required": true
+        },
+
+        "client_encryption_options": {
+            "type": "dict",
+            "fields": {
+                "enabled": {
+                    "type": "boolean",
+                    "default_value": false
+                },
+                "keystore": {
+                    "type": "string",
+                    "default_value": "conf/.keystore"
+                },
+                "keystore_password": {
+                    "type": "string",
+                    "default_value": "cassandra"
+                },
+                "protocol": {
+                    "type": "string",
+                    "required": false,
+                    "default_value": "TLS"
+                },
+                "algorithm": {
+                    "type": "string",
+                    "required": false,
+                    "default_value": "SunX509"
+                },
+                "store_type": {
+                    "type": "string",
+                    "required": false,
+                    "default_value": "JKS"
+                },
+                "cipher_suites": {
+                    "type": "list",
+                    "required": false,
+                    "default_value": ["TLS_RSA_WITH_AES_128_CBC_SHA", "TLS_RSA_WITH_AES_256_CBC_SHA"]
+                },
+                "require_client_auth": {
+                    "type": "boolean",
+                    "required": false,
+                    "default_value": false
+                }
+            },
+            "required": true
+        },
+
+        "internode_compression": {
+            "type": "string",
+            "required": true,
+            "options": [
+                "all",
+                "dc",
+                "none"
+            ],
+            "default_value": "all"
+        },
+
+        "internode_send_buff_size_in_bytes": {
+            "type": "int",
+            "required": false
+        },
+        "internode_recv_buff_size_in_bytes": {
+            "type": "int",
+            "required": false
+        },
+
+        "listen_address": {
+            "type": "string",
+            "required": false,
+            "default_value": "localhost",
+            "single_node": true
+        },
+
+        "broadcast_address": {
+            "type": "string",
+            "required": false,
+            "single_node": true
+        },
+
+        "rpc_address": {
+            "type": "string",
+            "required": false,
+            "default_value": "localhost",
+            "single_node": true
+        },
+
+        "start_native_transport": {
+            "type": "boolean",
+            "required": true,
+            "default_value": false
+        },
+        "native_transport_port": {
+            "type": "int",
+            "required": true,
+            "default_value": 9042
+        },
+        "native_transport_min_threads": {
+            "type": "int",
+            "required": false,
+            "default_value": 16
+        },
+        "native_transport_max_threads": {
+            "type": "int",
+            "required": false,
+            "default_value": 128
+        }
+    },
+
+    "groupings": [
+        {
+            "name": "General",
+            "list": [
+                "cluster_name",
+                "partitioner",
+                "num_tokens",
+                "seeds",
+                "listen_address",
+                "broadcast_address",
+                "rpc_address"
+            ]
+        },
+        {
+            "name": "Directories",
+            "list": [
+                "data_file_directories",
+                "commitlog_directory",
+                "saved_caches_directory"
+            ]
+        },
+        {
+            "name": "Ports",
+            "list": [
+                "storage_port",
+                "ssl_storage_port",
+                "rpc_port",
+                "native_transport_port"
+            ]
+        },
+        {
+            "name": "Caches",
+            "list": [
+                "key_cache_size_in_mb",
+                "key_cache_save_period",
+                "key_cache_keys_to_save",
+                "row_cache_size_in_mb",
+                "row_cache_save_period",
+                "row_cache_keys_to_save",
+                "row_cache_provider"
+            ]
+        },
+        {
+            "name": "Commit Log",
+            "list": [
+                "commitlog_sync",
+                "commitlog_total_space_in_mb",
+                "commitlog_segment_size_in_mb",
+                "commitlog_sync_period_in_ms",
+                "commitlog_sync_batch_window_in_ms"
+            ]
+        },
+        {
+            "name": "Memory Management",
+            "list": [
+                "memtable_total_space_in_mb",
+                "flush_largest_memtables_at",
+                "reduce_cache_sizes_at",
+                "reduce_cache_capacity_to"
+            ]
+        },
+        {
+            "name": "Concurrency Control",
+            "list": [
+                "concurrent_reads",
+                "concurrent_writes"
+            ]
+        },
+        {
+            "name": "Flushing",
+            "list": [
+                "memtable_flush_writers",
+                "memtable_flush_queue_size",
+                "populate_io_cache_on_flush"
+            ]
+        },
+        {
+            "name": "RPC",
+            "list": [
+                "start_rpc",
+                "rpc_server_type",
+                "thrift_framed_transport_size_in_mb",
+                "thrift_max_message_length_in_mb",
+                "rpc_keepalive",
+                "rpc_min_threads",
+                "rpc_max_threads",
+                "rpc_send_buff_size_in_bytes",
+                "rpc_recv_buff_size_in_bytes",
+                "request_scheduler",
+                "request_scheduler_options",
+                "request_scheduler_id"
+            ]
+        },
+        {
+            "name": "Native Transport",
+            "list": [
+                "start_native_transport",
+                "native_transport_min_threads",
+                "native_transport_max_threads"
+            ]
+        },
+        {
+            "name": "Timeouts",
+            "list": [
+                "read_request_timeout_in_ms",
+                "range_request_timeout_in_ms",
+                "write_request_timeout_in_ms",
+                "truncate_request_timeout_in_ms",
+                "request_timeout_in_ms",
+                "streaming_socket_timeout_in_ms",
+                "cross_node_timeout"
+            ]
+        },
+        {
+            "name": "Snapshots",
+            "list": [
+                "incremental_backups",
+                "auto_snapshot",
+                "snapshot_before_compaction"
+            ]
+        },
+        {
+            "name": "Compactions",
+            "list": [
+                "compaction_throughput_mb_per_sec",
+                "in_memory_compaction_limit_in_mb",
+                "concurrent_compactors",
+                "multithreaded_compaction",
+                "compaction_preheat_key_cache"
+            ]
+        },
+        {
+            "name": "Cluster Communication",
+            "list": [
+                "endpoint_snitch",
+                "stream_throughput_outbound_megabits_per_sec",
+                "phi_convict_threshold",
+                "dynamic_snitch_update_interval_in_ms",
+                "dynamic_snitch_reset_interval_in_ms",
+                "dynamic_snitch_badness_threshold",
+                "internode_compression",
+                "inter_dc_tcp_nodelay",
+                "internode_send_buff_size_in_bytes",
+                "internode_recv_buff_size_in_bytes"
+            ]
+        },
+        {
+            "name": "Hinted Handoff",
+            "list": [
+                "hinted_handoff_enabled",
+                "max_hint_window_in_ms",
+                "hinted_handoff_throttle_in_kb",
+                "max_hints_delivery_threads"
+            ]
+        },
+        {
+            "name": "Indexes",
+            "list": [
+                "column_index_size_in_kb",
+                "index_interval"
+            ]
+        },
+        {
+            "name": "Security",
+            "list": [
+                "authenticator",
+                "authorizer",
+                "permissions_validity_in_ms"
+            ]
+        },
+        {
+            "name": "Internode Encryption",
+            "list": [
+                "server_encryption_options"
+            ]
+        },
+        {
+            "name": "Client Encryption",
+            "list": [
+                "client_encryption_options"
+            ]
+        },
+        {
+            "name": "Miscellaneous",
+            "list": [
+                "disk_failure_policy",
+                "trickle_fsync",
+                "trickle_fsync_interval_in_kb"
+            ]
+        }
+    ]
+}
+

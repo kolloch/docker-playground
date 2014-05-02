@@ -1,0 +1,11 @@
+[
+    "m1.small",
+    {"value": "m1.large", "label": "m1.large", "selected": true},
+    "m1.xlarge",
+    "c1.medium",
+    "c1.xlarge",
+    "m2.xlarge",
+    "m2.2xlarge",
+    "m2.4xlarge",
+    "cc1.4xlarge"
+]

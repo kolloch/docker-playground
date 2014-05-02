@@ -1,0 +1,10 @@
+{
+    "apt": {
+        "match": ["dsc12", "cassandra"],
+        "latest": []
+    },
+    "yum": {
+        "match": ["dsc12", "cassandra12"],
+        "latest": []
+    }
+}

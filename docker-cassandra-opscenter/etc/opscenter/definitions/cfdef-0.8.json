@@ -1,0 +1,237 @@
+{
+    "properties": {
+        "name": {
+            "type": "string",
+            "required": true,
+            "editable": false
+        },
+        "comment": {
+            "type": "string",
+            "required": false
+        },
+        "id": {
+            "type": "int",
+            "required": false,
+            "editable": false
+        },
+        "column_type": {
+            "type": "string",
+            "required": true,
+            "options": [
+                "Standard",
+                "Super"
+            ],
+            "default_value": "Standard",
+            "editable": false
+        },
+        "comparator_type": {
+            "type": "string",
+            "required": true,
+            "options": [
+                {"label": "AsciiType", "value": "org.apache.cassandra.db.marshal.AsciiType"},
+                {"label": "BytesType", "value": "org.apache.cassandra.db.marshal.BytesType"},
+                {"label": "CounterColumnType", "value": "org.apache.cassandra.db.marshal.CounterColumnType"},
+                {"label": "DateType", "value": "org.apache.cassandra.db.marshal.DateType"},
+                {"label": "DoubleType", "value": "org.apache.cassandra.db.marshal.DoubleType"},
+                {"label": "DynamicCompositeType", "value": "org.apache.cassandra.db.marshal.DynamicCompositeType"},
+                {"label": "FloatType", "value": "org.apache.cassandra.db.marshal.FloatType"},
+                {"label": "IntegerType", "value": "org.apache.cassandra.db.marshal.IntegerType"},
+                {"label": "LexicalUUIDType", "value": "org.apache.cassandra.db.marshal.LexicalUUIDType"},
+                {"label": "LongType", "value": "org.apache.cassandra.db.marshal.LongType"},
+                {"label": "TimeUUIDType", "value": "org.apache.cassandra.db.marshal.TimeUUIDType"},
+                {"label": "UTF8Type", "value": "org.apache.cassandra.db.marshal.UTF8Type"},
+                {"label": "UUIDType", "value": "org.apache.cassandra.db.marshal.UUIDType"}
+            ],
+            "default_value": "org.apache.cassandra.db.marshal.BytesType",
+            "editable": false
+        },
+        "subcomparator_type": {
+            "type": "string",
+            "required": false,
+            "parent": "column_type",
+            "parent_options": {
+                "Super": {
+                    "subcomparator_type": {
+                        "options": [
+                            {"label": "AsciiType", "value": "org.apache.cassandra.db.marshal.AsciiType"},
+                            {"label": "BytesType", "value": "org.apache.cassandra.db.marshal.BytesType"},
+                            {"label": "CounterColumnType", "value": "org.apache.cassandra.db.marshal.CounterColumnType"},
+                            {"label": "DateType", "value": "org.apache.cassandra.db.marshal.DateType"},
+                            {"label": "DoubleType", "value": "org.apache.cassandra.db.marshal.DoubleType"},
+                            {"label": "DynamicCompositeType", "value": "org.apache.cassandra.db.marshal.DynamicCompositeType"},
+                            {"label": "FloatType", "value": "org.apache.cassandra.db.marshal.FloatType"},
+                            {"label": "IntegerType", "value": "org.apache.cassandra.db.marshal.IntegerType"},
+                            {"label": "LexicalUUIDType", "value": "org.apache.cassandra.db.marshal.LexicalUUIDType"},
+                            {"label": "LongType", "value": "org.apache.cassandra.db.marshal.LongType"},
+                            {"label": "TimeUUIDType", "value": "org.apache.cassandra.db.marshal.TimeUUIDType"},
+                            {"label": "UTF8Type", "value": "org.apache.cassandra.db.marshal.UTF8Type"},
+                            {"label": "UUIDType", "value": "org.apache.cassandra.db.marshal.UUIDType"}
+                        ],
+                        "default_value": "org.apache.cassandra.db.marshal.BytesType",
+                        "editable": false
+                    }
+                }
+            }
+        },
+        "key_validation_class": {
+            "type": "string",
+            "required": false,
+            "options": [
+                {"label": "AsciiType", "value": "org.apache.cassandra.db.marshal.AsciiType"},
+                {"label": "BytesType", "value": "org.apache.cassandra.db.marshal.BytesType"},
+                {"label": "DateType", "value": "org.apache.cassandra.db.marshal.DateType"},
+                {"label": "DoubleType", "value": "org.apache.cassandra.db.marshal.DoubleType"},
+                {"label": "DynamicCompositeType", "value": "org.apache.cassandra.db.marshal.DynamicCompositeType"},
+                {"label": "FloatType", "value": "org.apache.cassandra.db.marshal.FloatType"},
+                {"label": "IntegerType", "value": "org.apache.cassandra.db.marshal.IntegerType"},
+                {"label": "LexicalUUIDType", "value": "org.apache.cassandra.db.marshal.LexicalUUIDType"},
+                {"label": "LongType", "value": "org.apache.cassandra.db.marshal.LongType"},
+                {"label": "TimeUUIDType", "value": "org.apache.cassandra.db.marshal.TimeUUIDType"},
+                {"label": "UTF8Type", "value": "org.apache.cassandra.db.marshal.UTF8Type"},
+                {"label": "UUIDType", "value": "org.apache.cassandra.db.marshal.UUIDType"}
+            ],
+            "default_value": "org.apache.cassandra.db.marshal.BytesType"
+        },
+        "default_validation_class": {
+            "type": "string",
+            "required": false,
+            "options": [
+                {"label": "AsciiType", "value": "org.apache.cassandra.db.marshal.AsciiType"},
+                {"label": "BytesType", "value": "org.apache.cassandra.db.marshal.BytesType"},
+                {"label": "BooleanType", "value": "org.apache.cassandra.db.marshal.BooleanType"},
+                {"label": "CounterColumnType", "value": "org.apache.cassandra.db.marshal.CounterColumnType"},
+                {"label": "DateType", "value": "org.apache.cassandra.db.marshal.DateType"},
+                {"label": "DoubleType", "value": "org.apache.cassandra.db.marshal.DoubleType"},
+                {"label": "DynamicCompositeType", "value": "org.apache.cassandra.db.marshal.DynamicCompositeType"},
+                {"label": "FloatType", "value": "org.apache.cassandra.db.marshal.FloatType"},
+                {"label": "IntegerType", "value": "org.apache.cassandra.db.marshal.IntegerType"},
+                {"label": "LexicalUUIDType", "value": "org.apache.cassandra.db.marshal.LexicalUUIDType"},
+                {"label": "LongType", "value": "org.apache.cassandra.db.marshal.LongType"},
+                {"label": "TimeUUIDType", "value": "org.apache.cassandra.db.marshal.TimeUUIDType"},
+                {"label": "UTF8Type", "value": "org.apache.cassandra.db.marshal.UTF8Type"},
+                {"label": "UUIDType", "value": "org.apache.cassandra.db.marshal.UUIDType"}
+            ],
+            "default_value": "org.apache.cassandra.db.marshal.BytesType"
+        },
+        "gc_grace_seconds": {
+            "type": "int",
+            "required": false,
+            "default_value": 864000
+        },
+        "key_cache_size": {
+            "type": "float",
+            "required": false,
+            "default_value": 200000
+        },
+        "key_cache_save_period_in_seconds": {
+            "type": "int",
+            "required": false,
+            "default_value": 14400
+        },
+        "max_compaction_threshold": {
+            "type": "int",
+            "required": false,
+            "default_value": 32
+        },
+        "min_compaction_threshold": {
+            "type": "int",
+            "required": false,
+            "default_value": 4
+        },
+        "memtable_flush_after_mins": {
+            "type": "int",
+            "required": false,
+            "default_value": 1440
+        },
+        "memtable_throughput_in_mb": {
+            "type": "int",
+            "required": false
+        },
+        "memtable_operations_in_millions": {
+            "type": "float",
+            "required": false
+        },
+        "replicate_on_write": {
+            "type": "boolean",
+            "required": false,
+            "default_value": true
+        },
+        "read_repair_chance": {
+            "type": "float",
+            "required": false,
+            "default_value": 1.0
+        },
+        "row_cache_size": {
+            "type": "float",
+            "required": false,
+            "default_value": 0
+        },
+        "row_cache_save_period_in_seconds": {
+            "type": "int",
+            "required": false,
+            "default_value": 0
+        },
+        "row_cache_provider": {
+            "type": "string",
+            "required": false,
+            "options": [
+                {"label": "ConcurrentLinkedHashCacheProvider", "value": "org.apache.cassandra.cache.ConcurrentLinkedHashCacheProvider"},
+                {"label": "SerializingCacheProvider", "value": "org.apache.cassandra.cache.SerializingCacheProvider"}
+            ],
+            "default_value": "org.apache.cassandra.cache.ConcurrentLinkedHashCacheProvider"
+        }
+    },
+    "groupings": [
+        {
+            "name": "General",
+            "list": [
+                "id",
+                "name",
+                "column_type",
+                "comparator_type",
+                "subcomparator_type",
+                "key_validation_class",
+                "default_validation_class",
+                "gc_grace_seconds"
+            ]
+        },
+        {
+            "name": "Performance Tuning",
+            "list": [
+                "memtable_flush_after_mins",
+                "memtable_throughput_in_mb",
+                "memtable_operations_in_millions",
+                "key_cache_size",
+                "key_cache_save_period_in_seconds",
+                "row_cache_size",
+                "row_cache_save_period_in_seconds",
+                "row_cache_provider",
+                "read_repair_chance",
+                "replicate_on_write"
+            ]
+        },
+        {
+            "name": "Compaction",
+            "list": [
+                "max_compaction_threshold",
+                "min_compaction_threshold"
+            ]
+        }
+    ],
+    "validation_classes": [
+        {"label": "AsciiType", "value": "org.apache.cassandra.db.marshal.AsciiType"},
+        {"label": "BytesType", "value": "org.apache.cassandra.db.marshal.BytesType"},
+        {"label": "BooleanType", "value": "org.apache.cassandra.db.marshal.BooleanType"},
+        {"label": "CounterColumnType", "value": "org.apache.cassandra.db.marshal.CounterColumnType"},
+        {"label": "DateType", "value": "org.apache.cassandra.db.marshal.DateType"},
+        {"label": "DoubleType", "value": "org.apache.cassandra.db.marshal.DoubleType"},
+        {"label": "DynamicCompositeType", "value": "org.apache.cassandra.db.marshal.DynamicCompositeType"},
+        {"label": "FloatType", "value": "org.apache.cassandra.db.marshal.FloatType"},
+        {"label": "IntegerType", "value": "org.apache.cassandra.db.marshal.IntegerType"},
+        {"label": "LexicalUUIDType", "value": "org.apache.cassandra.db.marshal.LexicalUUIDType"},
+        {"label": "LongType", "value": "org.apache.cassandra.db.marshal.LongType"},
+        {"label": "TimeUUIDType", "value": "org.apache.cassandra.db.marshal.TimeUUIDType"},
+        {"label": "UTF8Type", "value": "org.apache.cassandra.db.marshal.UTF8Type"},
+        {"label": "UUIDType", "value": "org.apache.cassandra.db.marshal.UUIDType"}
+    ]
+}

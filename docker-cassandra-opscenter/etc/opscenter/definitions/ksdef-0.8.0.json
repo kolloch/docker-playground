@@ -1,0 +1,36 @@
+{
+    "properties": {
+        "name": {
+            "type": "string",
+            "required": true,
+            "editable": false
+        },
+
+        "strategy_class": {
+            "type": "string",
+            "required": true,
+            "options": [
+                "org.apache.cassandra.locator.SimpleStrategy",
+                "org.apache.cassandra.locator.NetworkTopologyStrategy",
+                "org.apache.cassandra.locator.OldNetworkTopologyStrategy"
+            ],
+            "default_value": "org.apache.cassandra.locator.SimpleStrategy",
+            "editable": true
+        },
+
+        "durable_writes": {
+            "type": "boolean",
+            "default_value": true
+        }
+    },
+
+    "groupings": [
+        {
+            "list": [
+                "name",
+                "strategy_class",
+                "durable_writes"
+            ]
+        }
+    ]
+}

@@ -1,0 +1,10 @@
+{
+    "apt": {
+        "match": ["dsc", "cassandra"],
+        "latest": ["python-cql"]
+    },
+    "yum": {
+        "match": ["dsc", "apache-cassandra1"],
+        "latest": ["python26-cql"]
+    }
+}

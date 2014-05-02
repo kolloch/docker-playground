@@ -5,5 +5,5 @@ set -e
 . config.sh
 
 # Start Cassandra
-echo "=== Starting Cassandra..."
-exec cassandra -f -p /var/run/cassandra.pid
+echo "=== Starting Cassandra (with supervisord)..."
+exec /usr/bin/supervisord
