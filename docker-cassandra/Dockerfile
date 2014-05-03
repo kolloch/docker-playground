@@ -43,4 +43,4 @@ RUN chown -R cassandra:cassandra /etc/cassandra
 EXPOSE 7199 7000 7001 9160 9042 
 EXPOSE 8012 61620 61621
 EXPOSE 22
-CMD init.sh 
+CMD ["init.sh"] 

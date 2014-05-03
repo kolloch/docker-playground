@@ -9,7 +9,7 @@ FROM ubuntu_java
 RUN echo "deb http://debian.datastax.com/community stable main" | sudo tee -a /etc/apt/sources.list.d/datastax.sources.list
 RUN curl -L http://debian.datastax.com/debian/repo_key | sudo apt-key add -
 RUN apt-get update
-RUN apt-get install -y libssl0.9.8 opscenter-free openssh-client openssh-server 
+RUN apt-get install -y libssl0.9.8 opscenter openssh-client openssh-server supervisor
 
 # configure ssh
 RUN mkdir -p /root/.ssh/
@@ -32,4 +32,4 @@ RUN chmod 755 /usr/local/bin/init.sh
 
 EXPOSE 8888
 USER root
-CMD init.sh 
+CMD ["init.sh"]
