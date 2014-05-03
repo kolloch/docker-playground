@@ -5,7 +5,7 @@
 #
 # Kill and remove a docker instance if it exists
 #
-function kill_rm_instance {
+function instance_kill_rm {
     local NODE_NAME="$1"
 
     docker inspect $NODE_NAME 2>/dev/null >/dev/null && \
@@ -58,7 +58,7 @@ function cassandra_stop {
     local IDX="$1"
     local NODE_NAME="cass${IDX}"
 
-    kill_rm_instance "$NODE_NAME"
+    instance_kill_rm "$NODE_NAME"
 }
 
 #
@@ -86,7 +86,10 @@ function cassandra_start {
 
     echo -ne "Starting $NODE_NAME: "
 
+    # privileged is unfortunately necessary
+    # to allow opscenter agent installation
     local DOCKER_ID=$(docker run \
+            --privileged \
             -d \
             --name $NODE_NAME \
             -h $NODE_NAME \
@@ -120,4 +123,24 @@ function opscenter_start {
     docker run -d --name opscenter $SEEDS -p 8888 cassandra_opscenter >/dev/null
     local IP=$(instance_ip opscenter)
     echo "done, see http://$IP:8888/"   
+}
+
+#############
+# zookeeper
+#############
+
+function zookeeper_start {
+    local NODE_NAME="zookeeper1"
+
+    echo -ne "Starting $NODE_NAME: "
+
+    local DOCKER_ID=$(docker run \
+            -d \
+            --name $NODE_NAME \
+            -h $NODE_NAME \
+            zookeeper)
+
+    local IP=$(instance_ip $NODE_NAME)
+
+    echo "at $IP"   
 }

@@ -11,3 +11,5 @@ for i in {1..3}; do
 done
 
 instance_status opscenter
+
+instance_status zookeeper1

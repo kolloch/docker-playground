@@ -14,3 +14,5 @@ cassandra_start 2
 cassandra_start 3
 
 opscenter_start
+
+zookeeper_start
