@@ -1,3 +1,3 @@
 #!/bin/bash
 
-docker build -t ubuntu_java .
+docker build  $* -t ubuntu_java .
