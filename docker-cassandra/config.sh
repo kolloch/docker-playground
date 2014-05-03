@@ -21,7 +21,7 @@ CONFIG=/etc/cassandra/
 sed -i \
     -e "s/{{LISTEN_ADDRESS}}/$IP/" \
     -e "s/{{BROADCAST_ADDRESS}}/$EXT_IP/" \
-    -e "s/{{RPC_ADDRESS}}/$IP/" \
+    -e "s/{{RPC_ADDRESS}}/$EXT_IP/" \
     -e "s/{{SEEDS}}/$SEEDS/" \
     $CONFIG/cassandra.yaml
 sed -i \
