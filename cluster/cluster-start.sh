@@ -16,3 +16,7 @@ cassandra_start 3
 opscenter_start
 
 zookeeper_start
+
+for i in {1..3}; do
+    kafka_start "$i"
+done
