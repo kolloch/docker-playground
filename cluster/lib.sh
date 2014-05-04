@@ -75,8 +75,6 @@ function cassandra_start {
 
     mkdir -p logs/$IDX data/$IDX
 
-    chown -R 104:107 logs/$IDX data/$IDX
-
     local SEEDS=""
     if [ $IDX -ne 1 ]; then
         local FIRST_IP=$(docker inspect --format '{{ .NetworkSettings.IPAddress }}' cass1)

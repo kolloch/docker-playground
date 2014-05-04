@@ -27,3 +27,5 @@ sed -i \
 sed -i \
     -e "s/{{RMI_ADDRESS}}/$IP/" \
     $CONFIG/cassandra-env.sh
+
+chown cassandra:cassandra /var/{log,lib}/cassandra
