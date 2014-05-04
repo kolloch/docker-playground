@@ -158,15 +158,13 @@ function kafka_start {
     local IDX="$1"
     local NODE_NAME="kafka$IDX"
 
-    local ZOOKEEPER_ADDRESS=$(zookeeper_address)
-
     echo -ne "Starting $NODE_NAME: "
 
     local DOCKER_ID=$(docker run \
             -d \
             --name $NODE_NAME \
             -h $NODE_NAME \
-            -e ZOOKEEPER_NODES=$ZOOKEEPER_ADDRESS \
+            --link zookeeper1:zookeeper \
             -e BROKER_ID=$IDX \
             kafka)
 

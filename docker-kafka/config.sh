@@ -15,8 +15,12 @@ if [ -z "$BROKER_ID" ]; then
 fi
 
 if [ -z "$ZOOKEEPER_NODES" ]; then
-    echo ZOOKEEPER_NODES not configured >&2
-    exit 1
+    if [ -z "$ZOOKEEPER_PORT_2181_TCP_ADDR" ]; then
+        echo ZOOKEEPER_NODES not configured >&2
+        exit 1
+    else 
+        ZOOKEEPER_NODES="$ZOOKEEPER_PORT_2181_TCP_ADDR:2181"
+    fi
 fi
 
 cat <<EOF
