@@ -1,3 +1,3 @@
 #!/bin/bash
 
-docker build $* -t cassandra_opscenter .
+exec docker build $* -t cassandra_opscenter .

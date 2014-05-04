@@ -1,3 +1,3 @@
 #!/bin/bash
 
-docker build $* -t kafka .
+exec docker build $* -t kafka .

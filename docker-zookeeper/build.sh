@@ -1,3 +1,3 @@
 #!/bin/bash
 
-docker build $* -t zookeeper .
+exec docker build $* -t zookeeper .
