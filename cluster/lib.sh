@@ -179,3 +179,73 @@ function kafka_stop {
 
     instance_kill_rm $NODE_NAME
 }
+
+#############
+# storm
+#############
+
+STORM_NIMBUS_NODE="storm-nimbus1"
+
+function storm_nimbus_start {
+    local NODE_NAME="$STORM_NIMBUS_NODE"
+
+    echo -ne "Starting $NODE_NAME: "
+
+    local DOCKER_ID=$(docker run \
+            -d \
+            --name $NODE_NAME \
+            -h $NODE_NAME \
+            --link zookeeper1:zookeeper \
+            storm-nimbus)
+
+    local IP=$(instance_ip $NODE_NAME)
+
+    echo "at $IP"   
+}
+
+STORM_UI_NODE="storm-ui1"
+
+function storm_ui_start {
+    local NODE_NAME="$STORM_UI_NODE"
+
+    echo -ne "Starting $NODE_NAME: "
+
+    local DOCKER_ID=$(docker run \
+            -d \
+            --name $NODE_NAME \
+            -h $NODE_NAME \
+            --link zookeeper1:zookeeper \
+            --link $STORM_NIMBUS_NODE:nimbus \
+            storm-ui)
+
+    local IP=$(instance_ip $NODE_NAME)
+
+    echo "at $IP http://$IP:8080"   
+}
+
+
+function storm_supervisor_start {
+    local IDX="$1"
+    local NODE_NAME="storm-supervisor$IDX"
+
+    echo -ne "Starting $NODE_NAME: "
+
+    local DOCKER_ID=$(docker run \
+            -d \
+            --name $NODE_NAME \
+            -h $NODE_NAME \
+            --link zookeeper1:zookeeper \
+            --link $STORM_NIMBUS_NODE:nimbus \
+            storm-supervisor)
+
+    local IP=$(instance_ip $NODE_NAME)
+
+    echo "at $IP"   
+}
+
+function storm_supervisor_stop {
+    local IDX="$1"
+    local NODE_NAME="storm-supervisor$IDX"
+
+    instance_kill_rm $NODE_NAME
+}

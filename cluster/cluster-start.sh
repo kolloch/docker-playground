@@ -20,3 +20,10 @@ zookeeper_start
 for i in {1..3}; do
     kafka_start "$i"
 done
+
+storm_nimbus_start
+storm_ui_start
+
+for i in {1..3}; do
+    storm_supervisor_start "$i"
+done
