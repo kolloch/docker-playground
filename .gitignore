@@ -1,3 +1,5 @@
 cluster/logs
 cluster/data
 */build.log
+.idea
+target
