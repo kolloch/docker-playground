@@ -15,11 +15,11 @@ RUN chown zookeeper /var/lib/zookeeper
 ADD config.sh /usr/local/bin/config.sh
 RUN chmod 755 /usr/local/bin/config.sh
 
-ADD init.sh /usr/local/bin/init.sh
-RUN chmod 755 /usr/local/bin/init.sh
+ADD run.sh /usr/local/bin/run.sh
+RUN chmod 755 /usr/local/bin/run.sh
 
 WORKDIR /opt/zookeeper/
 VOLUME /var/lib/zookeeper
 VOLUME /var/log/zookeeper
 EXPOSE 2181
-CMD ["init.sh"]
+CMD ["run.sh"]

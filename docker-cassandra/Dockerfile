@@ -31,8 +31,8 @@ RUN mkdir -p /var/log/supervisor
 ADD config.sh /usr/local/bin/config.sh
 RUN chmod 755 /usr/local/bin/config.sh
 
-ADD init.sh /usr/local/bin/init.sh
-RUN chmod 755 /usr/local/bin/init.sh
+ADD run.sh /usr/local/bin/run.sh
+RUN chmod 755 /usr/local/bin/run.sh
 
 RUN rm -rf /etc/cassandra
 ADD etc/cassandra /etc/cassandra
@@ -43,4 +43,4 @@ RUN chown -R cassandra:cassandra /etc/cassandra
 EXPOSE 7199 7000 7001 9160 9042 
 EXPOSE 8012 61620 61621
 EXPOSE 22
-CMD ["init.sh"] 
+CMD ["run.sh"] 

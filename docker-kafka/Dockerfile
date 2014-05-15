@@ -11,11 +11,11 @@ RUN useradd kafka
 ADD config.sh /usr/local/bin/config.sh
 RUN chmod 755 /usr/local/bin/config.sh
 
-ADD init.sh /usr/local/bin/init.sh
-RUN chmod 755 /usr/local/bin/init.sh
+ADD run.sh /usr/local/bin/run.sh
+RUN chmod 755 /usr/local/bin/run.sh
 
 WORKDIR /opt/kafka/
 VOLUME /var/lib/kafka
 VOLUME /var/log/kafka
 EXPOSE 9092
-CMD ["init.sh"]
+CMD ["run.sh"]
