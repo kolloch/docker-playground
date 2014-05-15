@@ -3,3 +3,4 @@ cluster/data
 */build.log
 .idea
 target
+*.sublime-*
